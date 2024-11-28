@@ -55,13 +55,23 @@ public class LoanCalc {
 		return payment;
     }
     
-    // Uses bisection search to compute an approximation of the periodical payment 
-	// that will bring the ending balance of a loan close to 0.
-	// Given: the sum of the loan, the periodical interest rate (as a percentage),
-	// the number of periods (n), and epsilon, the approximation's accuracy
-	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-        // Replace the following statement with your code
-		return 0;
+		iterationCounter = 0;//reset iteration counter
+
+		double low = loan / n; // lower bound
+		double high = loan * Math.pow(1 + rate / 100, n);// upper bound
+		double mid = (low + high) / 2;// initial middle
+
+		while (high - low > epsilon) {
+			iterationCounter++;
+			mid = (low + high) / 2;
+			double balance = endBalance(loan, rate, n, mid);
+			if (balance > 0){
+				low =mid;//recalibrate lower bound
+			} else {
+				high = mid;//recalibrate upper bound
+			}	
+		}
+		return mid;
     }
 }
