@@ -50,7 +50,7 @@ public class Anagram {
 		String result = "";
 		for (int i = 0; i < str.length(); i++){
 			char current = str.charAt(i);
-			if (Character.isLetter(current) || current == ' '){//add letters as lower case version:
+			if (Character.isLetter(current) || current == ' '){//add spaces and converted letters:
 				result += Character.toLowerCase(current);
 			}
 		}

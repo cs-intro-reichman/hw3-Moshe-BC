@@ -33,11 +33,6 @@ public class LoanCalc {
 		return balance;
 	}
 	
-	// Uses sequential search to compute an approximation of the periodical payment
-	// that will bring the ending balance of a loan close to 0.
-	// Given: the sum of the loan, the periodical interest rate (as a percentage),
-	// the number of periods (n), and epsilon, the approximation's accuracy
-	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		iterationCounter = 0; //reset iteration counter
 		double payment = loan / n; //first iteration guess
@@ -47,7 +42,7 @@ public class LoanCalc {
 			if (balance < 0){//make negative balance positive
 				balance = (- 1) * balance;
 			}
-			if (balance < epsilon) {// good enough proximity
+			if (balance <= epsilon) {// good enough proximity
 				break;
 			}
 			payment += epsilon;// increment for next iteration
@@ -62,7 +57,7 @@ public class LoanCalc {
 		double high = loan * Math.pow(1 + rate / 100, n);// upper bound
 		double mid = (low + high) / 2;// initial middle
 
-		while (high - low > epsilon) {
+		while (high - low > epsilon) {// distance too large
 			iterationCounter++;
 			mid = (low + high) / 2;
 			double balance = endBalance(loan, rate, n, mid);
