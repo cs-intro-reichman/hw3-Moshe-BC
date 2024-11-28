@@ -26,24 +26,46 @@ public class Anagram {
 		System.out.println(pass ? "test passed" : "test Failed");
 	}  
 
-	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		String first = preProcess(str1);
+		String second = preProcess(str2);
+
+		if (first.length() != second.length()){
+			return false;
+		}
+		while (first.isEmpty() == false) {
+			char currentChar = first.charAt(0);
+			int index = second.indexOf(currentChar);
+			if (index == -1) { //check if current letter exists in second word
+				return false;
+			}
+			//Remove current from both strings:
+			first = first.substring(1);
+			second = second.substring(0, index) + second.substring(index + 1);
+		}
+		return true;
 	}
-	   
-	// Returns a preprocessed version of the given string: all the letter characters are converted
-	// to lower-case, and all the other characters are deleted, except for spaces, which are left
-	// as is. For example, the string "What? No way!" becomes "whatnoway"
+
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String result = "";
+		for (int i = 0; i < str.length(); i++){
+			char current = str.charAt(i);
+			if (Character.isLetter(current)){//add letters as lower case version:
+				result += Character.toLowerCase(current);
+			}
+		}
+		return result;
 	} 
 	   
-	// Returns a random anagram of the given string. The random anagram consists of the same
-	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		String result = "";
+		//add random letter to result and remove it from string until completed
+		while (str.isEmpty() == false) {
+			int random = (int)(Math.random() * str.length());
+			result += str.charAt(random);
+			str = str.substring(0, random) + str.substring(random + 1);
+
+				}
+		return result;
 	}
 }
