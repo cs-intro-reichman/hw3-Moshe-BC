@@ -40,7 +40,7 @@ public class LoanCalc {
 			iterationCounter++;
 			double balance = endBalance(loan, rate, n, payment);
 			if (balance < 0){//make negative balance positive
-				balance = (- 1) * balance;
+				balance -= 2 * balance;
 			}
 			if (balance <= epsilon) {// good enough proximity
 				break;
